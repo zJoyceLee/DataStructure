@@ -15,6 +15,21 @@ LinkedList<T>::LinkedList(const std::vector<T> & vec) :
 }
 
 template <typename T>
+LinkedList<T>::LinkedList(const LinkedList & rhs) :
+    m_data(nullptr)
+{
+    this->m_data = new LinkedListNode<T>(rhs.m_data->data());
+
+    LinkedListNode<T> * lhsCur = m_data;
+    const LinkedListNode<T> * rhsCur = rhs.begin()->next();
+    while(rhsCur != rhs.end()) {
+        this->insertAfter(lhsCur, rhsCur->data());
+        lhsCur = lhsCur->next();
+        rhsCur = rhsCur->next();
+    }//while
+}
+
+template <typename T>
 LinkedList<T>::~LinkedList() {
     while(this->m_data != nullptr) {
         auto nextElement = this->m_data->next();
@@ -40,23 +55,56 @@ void LinkedList<T>::push_front(const T & element) {
 
 template <typename T>
 void LinkedList<T>::insertBefore(LinkedListNode<T> * position, const T & element) {
-    auto pElementNode = new LinkedListNode<T>(element);
     auto prevNode = position->prev();
 
-    pElementNode->prev() = prevNode;
-    pElementNode->next() = position;
+    if(prevNode == nullptr) {
+        /// if insert before head
+        this->push_front(element);
+    } else {
+        auto pElementNode = new LinkedListNode<T>(element);
 
-    prevNode->next() = pElementNode;
-    position->prev() = pElementNode;
+        pElementNode->prev() = prevNode;
+        pElementNode->next() = position;
+
+        prevNode->next() = pElementNode;
+        position->prev() = pElementNode;
+    }//if-else
 }
 
+template <typename T>
+void LinkedList<T>::insertAfter(LinkedListNode<T> * position, const T & element) {
+    auto pElementNode = new LinkedListNode<T>(element);
+    auto nextNode = position->next();
+
+    if(nextNode == nullptr) {
+        /// insert at the back
+        position->next() = pElementNode;
+        pElementNode->prev() = position;
+    } else {
+        pElementNode->prev() = position;
+        pElementNode->next() = nextNode;
+
+        position->next() = pElementNode;
+        nextNode->prev() = pElementNode;
+    }//if-else
+}
 
 template <typename T>
 void LinkedList<T>::remove(LinkedListNode<T> * position) {
     auto prevNode = position->prev();
     auto nextNode = position->next();
-    prevNode->next() = nextNode;
-    nextNode->prev() = prevNode;
+
+    if(prevNode == nullptr) {
+        /// if remove first element
+        nextNode->prev() = prevNode;
+        this->m_data = nextNode;
+    } else if(nextNode == nullptr) {
+        /// if remove last element
+        prevNode->next() = nextNode;
+    } else {
+        prevNode->next() = nextNode;
+        nextNode->prev() = prevNode;
+    }//if-else
 
     delete position;
 }
@@ -73,7 +121,7 @@ LinkedListNode<T> * LinkedList<T>::find(LinkedListNode<T> * startPosition, Unary
 
 template <typename T>
 template <typename UnaryFunc>
-void LinkedList<T>::traverse(UnaryFunc visitor) {
+void LinkedList<T>::traverse(UnaryFunc visitor) const {
     for(auto cur = this->m_data; cur != nullptr; cur = cur->next())
         visitor(cur->data());
 }
