@@ -316,10 +316,11 @@ template <typename T>
 void BinaryTree<T>::preOrderRevolute(BinTreeNode<T>* thisNode, BinTreeNode<T> * cpNode) {
     if(thisNode == nullptr)
         return;
-    //cpNode->insertLeft(thisNode->rightChild);
-    //thisNode->insertRight(cpNode->leftChild);
-    InsertLeftChild(cpNode, thisNode->rightChild->data);
-    InsertRightChild(thisNode, cpNode->leftChild->data);
+    if(thisNode->rightChild != nullptr)
+        InsertLeftChild(cpNode, thisNode->rightChild->data);
+    if(thisNode->leftChild != nullptr)
+        InsertRightChild(cpNode, thisNode->leftChild->data);
+
     preOrderRevolute(thisNode->leftChild, cpNode->rightChild);
     preOrderRevolute(thisNode->rightChild, cpNode->leftChild);
 }
@@ -327,11 +328,7 @@ void BinaryTree<T>::preOrderRevolute(BinTreeNode<T>* thisNode, BinTreeNode<T> * 
 template <typename T>
 BinaryTree<T> BinaryTree<T>::revolute() {
     BinaryTree<T> ret;
-    BinTreeNode<T> cloneNode;
-    new BinTreeNode<T>(this->root->data);
-    //cloneNode(this->root->data, this->root->leftChild, this->root->rightChild);
-    cloneNode.data = this->root->data;
-    ret.root = cloneNode;
+    ret.root = new BinTreeNode<T>(this->root->data);
     preOrderRevolute(this->root, ret.root);
     return ret;
 }

@@ -20,8 +20,11 @@ int main(int argc, char * argv[])
     std::cout << "countLeaves: " << bt.countLeaf() << std::endl;
     bt.LevelOrder(Write<char>);
 
-    //bt.revolute();
-    //DisplayBTWithTreeShape<char>(bt);
+    std::cout << std::endl << "BT: " << std::endl;
+    DisplayBTWithTreeShape<char>(bt);
+    BinaryTree<char> btRevolute = bt.revolute();
+    std::cout << std::endl << "BT Revolute: " << std::endl;
+    DisplayBTWithTreeShape<char>(btRevolute);
     /*while (c != '0')	{
 
         std::cout << "countLeaves: " << bt.countLeaf();
