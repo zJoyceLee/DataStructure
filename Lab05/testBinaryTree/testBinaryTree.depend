@@ -28,13 +28,16 @@
 
 1420964531 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinTreeNode.h
 
-1421131034 source:/home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/main.cpp
+1421173139 source:/home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/main.cpp
 	<iostream>
+	<vector>
 	"BinaryTree.hpp"
 
-1421133605 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinaryTree.hpp
+1421173769 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinaryTree.hpp
+	<vector>
 	"LinkQueue.hpp"
 	"BinTreeNode.hpp"
+	"NodeInfo.hpp"
 	"BinaryTree.tcc"
 
 1420966289 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/LinkQueue.hpp
@@ -56,11 +59,15 @@
 	<cstdarg>
 	<cassert>
 
-1421052696 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/Node.hpp
+1421172142 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/Node.hpp
 
 1420967504 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/LinkQueue.tcc
 
 1420966575 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinTreeNode.hpp
 
-1421140356 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinaryTree.tcc
+1421173841 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/BinaryTree.tcc
+
+1421167729 source:/home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/tmp_menu.cpp
+
+1421172230 /home/joyce/Codes/cpp/DataStructure/Lab05/testBinaryTree/NodeInfo.hpp
 

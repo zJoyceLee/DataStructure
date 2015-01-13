@@ -1,6 +1,10 @@
 #pragma once
+//STL
+#include <vector>
+//Current Project
 #include "LinkQueue.hpp"
 #include "BinTreeNode.hpp"
+#include "NodeInfo.hpp"
 
 template <typename T>
 class BinaryTree {
@@ -61,9 +65,12 @@ public:
 //--------------------------------------------------------------------
 	int countLeaf(const BinTreeNode<T> * r) const;
 	int countLeaf() const;
-
+//--------------------------------------------------------------------
 	BinaryTree<T> revolute();
 	void preOrderRevolute(BinTreeNode<T> * thisNode, BinTreeNode<T> * cpNode);
+//--------------------------------------------------------------------
+    void printNodeByLevel(BinTreeNode<T> * root);
+
 
 };
 
@@ -74,10 +81,10 @@ template <typename T>
 void DisplayBTWithTreeShape(BinaryTree<T> & bt);
 
 template <typename T>
-void CreateBinaryTree(BinTreeNode<T> * & r, T pre[], T in[],
+void CreateBinaryTree(BinTreeNode<T> * & r, std::vector<T> pre, std::vector<T> in,
 	int preLeft, int preRight, int inLeft, int inRight);
 
 template <typename T>
-BinaryTree<T> & CreateBinaryTree(T pre[], T in[], int n);
+BinaryTree<T> & CreateBinaryTree(std::vector<T> pre, std::vector<T> in, int n);
 
 #include "BinaryTree.tcc"

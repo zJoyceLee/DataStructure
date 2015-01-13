@@ -332,11 +332,37 @@ BinaryTree<T> BinaryTree<T>::revolute() {
     preOrderRevolute(this->root, ret.root);
     return ret;
 }
-//---------------------------------------------------------------------------------------
-//(3) countBreadth() :
 
 //---------------------------------------------------------------------------------------
-//(4) nonRecurringOrder() :
+//(3) countBreadth() :
+template <typename T>
+void BinaryTree<T>::printNodeByLevel(BinTreeNode<T> * root) {
+    if(root == nullptr)
+        return;
+    std::vector<BinTreeNode<T> *> vec;
+    vec.push_back(root);
+    std::size_t cur = 0;
+    std::size_t last = 1;
+
+    while(cur < vec.size()) {
+        last = vec.size();
+
+        while(cur < last) {
+            std::cout << vec[cur]->data <<" ";
+
+            if(vec[cur]->leftChild != nullptr)
+                vec.push_back(vec[cur]->leftChild);
+            if(vec[cur]->rightChild != nullptr)
+                vec.push_back(vec[cur]->rightChild);
+            ++cur;
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+//---------------------------------------------------------------------------------------
+//(4) nonRecurringInOrder() :
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
@@ -359,7 +385,7 @@ void DisplayBTWithTreeShape(BinaryTree<T> & bt) {
 }
 
 template <typename T>
-void CreateBinaryTree(BinTreeNode<T> * & r, T pre[], T in[], int preLeft, int preRight, int inLeft, int inRight) {
+void CreateBinaryTree(BinTreeNode<T> * & r, std::vector<T> pre, std::vector<T> in, int preLeft, int preRight, int inLeft, int inRight) {
 	if (inLeft > inRight) {
         r = nullptr;
 	}
@@ -376,7 +402,7 @@ void CreateBinaryTree(BinTreeNode<T> * & r, T pre[], T in[], int preLeft, int pr
 }
 
 template <typename T>
-BinaryTree<T> & CreateBinaryTree(T pre[], T in[], int n) {
+BinaryTree<T> & CreateBinaryTree(std::vector<T> pre, std::vector<T> in, int n) {
 	BinTreeNode<T> * r;
 	CreateBinaryTree<T>(r, pre, in, 0, n - 1, 0, n - 1);
 
