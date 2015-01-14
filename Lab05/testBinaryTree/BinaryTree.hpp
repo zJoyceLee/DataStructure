@@ -4,7 +4,6 @@
 //Current Project
 #include "LinkQueue.hpp"
 #include "BinTreeNode.hpp"
-#include "ElementInfo.hpp"
 
 template <typename T>
 class BinaryTree {
@@ -29,7 +28,7 @@ public:
 	BinaryTree();
 	BinaryTree(const T & e);
 	~BinaryTree();
-	BinTreeNode<T> *GetRoot() const;
+	BinTreeNode<T> * GetRoot() const;
 	bool IsEmpty() const;
 	Status GetElem(BinTreeNode<T> *p, T &e) const;
 
@@ -71,6 +70,9 @@ public:
 //--------------------------------------------------------------------
     void printMaxBreadth(BinTreeNode<T> * root);
     void countBreadth();
+//--------------------------------------------------------------------
+    void nonRecurringInOrder(BinTreeNode<T> * root, void (*Visit)(const T &)) const;
+    void nonRecurringInOrder(void (*Visit)(const T &)) const;
 
 
 };

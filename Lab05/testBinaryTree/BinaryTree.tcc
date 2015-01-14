@@ -86,10 +86,11 @@ void BinaryTree<T>::PostOrder(void (*Visit)(const T &)) const {
 template <typename T>
 void BinaryTree<T>::LevelOrder(void (*Visit)(const T &)) const {
 	LinkQueue<BinTreeNode<T> *> q;
-	BinTreeNode<T> *p;
+	BinTreeNode<T> * p;
 
-	if (root != nullptr) q.EnQueue(root);
-	while (!q.IsEmpty())	{
+	if (root != nullptr)
+        q.EnQueue(root);
+	while (!q.IsEmpty()) {
 		q.DelQueue(p);
 		(*Visit)(p->data);
 		if (p->leftChild != nullptr)
@@ -100,7 +101,7 @@ void BinaryTree<T>::LevelOrder(void (*Visit)(const T &)) const {
 }
 
 template <typename T>
-int BinaryTree<T>::Height(const BinTreeNode<T> *r) const {
+int BinaryTree<T>::Height(const BinTreeNode<T> * r) const {
 	if(r == nullptr) {
 		return 0;
     } else {
@@ -377,7 +378,30 @@ void BinaryTree<T>::countBreadth() {
 
 //---------------------------------------------------------------------------------------
 //(4) nonRecurringInOrder() :
+template <typename T>
+void BinaryTree<T>::nonRecurringInOrder(BinTreeNode<T> * root, void (*Visit)(const T &)) const {
+    std::vector<T> myvec;
+    if(root == nullptr)
+        return;
+    BinTreeNode<T> * ptr = root->leftChild;
+    myvec.push_back(root->data);
+    while(!myvec.empty()) {
+        if(ptr != nullptr) {
+            myvec.push_back(ptr->data);
+            ptr = ptr->leftChild;
+        }
+        ptr->data = *(myvec.end() - 1);
+        myvec.pop_back();
+        //(*Visit)(ptr->data);
+        std::cout << ptr->data << " ";
+        ptr = ptr->rightChild;
+    }
+}
 
+template <typename T>
+void BinaryTree<T>::nonRecurringInOrder(void (*Visit)(const T &)) const {
+    nonRecurringInOrder(root, Visit);
+}
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 template <typename T>

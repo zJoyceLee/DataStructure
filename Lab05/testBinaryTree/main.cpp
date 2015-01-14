@@ -46,24 +46,23 @@ void printTest(BinaryTree<T> btree, std::vector<T> vec1, std::vector<T> vec2) {
          btree.countBreadth();
             std::cout << std::endl;
     //------------------------------------------------------------------------
-
+    std::cout << "(4) nRInOrd: ";
+        btree.nonRecurringInOrder(Write<char>);
+            std::cout << std::endl;
     //------------------------------------------------------------------------
 }
 
 int main(int argc, char * argv[])
 {
-	//BinTreeNode<char> * p;
 	std::vector<char> pre{'A','B','D','E','G','H','C','F','I'}; //pre
 	std::vector<char> in{'D','B','G','E','H','A','C','F','I'};  // in
 	int n = 9;						                  //node number
 	BinaryTree<char> bt;
-    //char c = 'x', e;
-
 	bt = CreateBinaryTree(pre, in, n);           //make up binary tree
 	printTest(bt, pre, in);
-	std::cout << std::endl;
 
 
+    std::cout << std::endl;
 	return 0;
 }
 
