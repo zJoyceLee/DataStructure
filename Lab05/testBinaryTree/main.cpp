@@ -39,8 +39,12 @@ void printTest(BinaryTree<T> btree, std::vector<T> vec1, std::vector<T> vec2) {
     BinaryTree<T> btreeRevolute = btree.revolute();
     std::cout << std::endl << "(2) BinaryTree Revolute: ";
     DisplayBTWithTreeShape<T>(btreeRevolute);
+    std::cout << std::endl;
     //------------------------------------------------------------------------
-
+    //btree.printMaxBreadth(btree.GetRoot());
+	std::cout << "(3) countBreadth : ";
+         btree.countBreadth();
+            std::cout << std::endl;
     //------------------------------------------------------------------------
 
     //------------------------------------------------------------------------
@@ -58,7 +62,7 @@ int main(int argc, char * argv[])
 	bt = CreateBinaryTree(pre, in, n);           //make up binary tree
 	printTest(bt, pre, in);
 	std::cout << std::endl;
-	bt.printNodeByLevel(bt.GetRoot());
+
 
 	return 0;
 }

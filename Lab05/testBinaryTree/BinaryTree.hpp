@@ -4,7 +4,7 @@
 //Current Project
 #include "LinkQueue.hpp"
 #include "BinTreeNode.hpp"
-#include "NodeInfo.hpp"
+#include "ElementInfo.hpp"
 
 template <typename T>
 class BinaryTree {
@@ -69,7 +69,8 @@ public:
 	BinaryTree<T> revolute();
 	void preOrderRevolute(BinTreeNode<T> * thisNode, BinTreeNode<T> * cpNode);
 //--------------------------------------------------------------------
-    void printNodeByLevel(BinTreeNode<T> * root);
+    void printMaxBreadth(BinTreeNode<T> * root);
+    void countBreadth();
 
 
 };

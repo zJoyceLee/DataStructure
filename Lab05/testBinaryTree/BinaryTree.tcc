@@ -336,30 +336,44 @@ BinaryTree<T> BinaryTree<T>::revolute() {
 //---------------------------------------------------------------------------------------
 //(3) countBreadth() :
 template <typename T>
-void BinaryTree<T>::printNodeByLevel(BinTreeNode<T> * root) {
+//void BinaryTree<T>::printNodeByLevel(BinTreeNode<T> * root) {
+void BinaryTree<T>::printMaxBreadth(BinTreeNode<T> * root) {
     if(root == nullptr)
         return;
     std::vector<BinTreeNode<T> *> vec;
     vec.push_back(root);
     std::size_t cur = 0;
     std::size_t last = 1;
-
+    std::vector<std::size_t> breadth;
     while(cur < vec.size()) {
         last = vec.size();
-
+        std::size_t number = 0;
         while(cur < last) {
-            std::cout << vec[cur]->data <<" ";
+            //std::cout << vec[cur]->data <<" ";
 
             if(vec[cur]->leftChild != nullptr)
                 vec.push_back(vec[cur]->leftChild);
             if(vec[cur]->rightChild != nullptr)
                 vec.push_back(vec[cur]->rightChild);
             ++cur;
+            ++number;
         }
-        std::cout << std::endl;
+        breadth.push_back(number);
+        //std::cout << std::endl;
     }
+    std::size_t maxBreadth = 0;
+    for(auto it = breadth.begin(); it != breadth.end(); ++it) {
+        //std::cout << *it << " " ;
+        if(maxBreadth < *it)
+            maxBreadth = *it;
+    }
+    std::cout << maxBreadth;
 }
 
+template <typename T>
+void BinaryTree<T>::countBreadth() {
+    printMaxBreadth(root);
+}
 
 //---------------------------------------------------------------------------------------
 //(4) nonRecurringInOrder() :
