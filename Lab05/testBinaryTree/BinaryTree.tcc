@@ -377,30 +377,44 @@ void BinaryTree<T>::countBreadth() {
 }
 
 //---------------------------------------------------------------------------------------
-//(4) nonRecurringInOrder() :
+//(4) nonRecursingInOrder() :
 template <typename T>
-void BinaryTree<T>::nonRecurringInOrder(BinTreeNode<T> * root, void (*Visit)(const T &)) const {
-    std::vector<T> myvec;
+void BinaryTree<T>::nonRecursingInOrder(const BinTreeNode<T> * root, void (*Visit)(const T &)) const {
+    std::vector<const BinTreeNode<T> *> virtualStack;
     if(root == nullptr)
         return;
-    BinTreeNode<T> * ptr = root->leftChild;
-    myvec.push_back(root->data);
-    while(!myvec.empty()) {
-        if(ptr != nullptr) {
-            myvec.push_back(ptr->data);
-            ptr = ptr->leftChild;
+
+    // start off
+    const BinTreeNode<T> * node = root;
+    virtualStack.push_back(root);
+    do {
+        // left recurse
+        node = node->leftChild;
+        while(node != nullptr) {
+            virtualStack.push_back(node);
+            node = node->leftChild;
         }
-        ptr->data = *(myvec.end() - 1);
-        myvec.pop_back();
-        //(*Visit)(ptr->data);
-        std::cout << ptr->data << " ";
-        ptr = ptr->rightChild;
-    }
+
+        // visit the parent node
+        do {
+            if(virtualStack.empty())
+                break;
+            node = virtualStack.back();
+            virtualStack.pop_back();
+            Visit(node->data);
+        } while(node->rightChild == nullptr);
+
+        // get the right child
+        if(node->rightChild != nullptr) {
+            node = node->rightChild;
+            virtualStack.push_back(node);
+        }
+    } while(!virtualStack.empty());
 }
 
 template <typename T>
-void BinaryTree<T>::nonRecurringInOrder(void (*Visit)(const T &)) const {
-    nonRecurringInOrder(root, Visit);
+void BinaryTree<T>::nonRecursingInOrder(void (*Visit)(const T &)) const {
+    nonRecursingInOrder(root, Visit);
 }
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------

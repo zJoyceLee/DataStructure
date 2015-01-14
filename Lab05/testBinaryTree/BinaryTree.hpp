@@ -71,9 +71,8 @@ public:
     void printMaxBreadth(BinTreeNode<T> * root);
     void countBreadth();
 //--------------------------------------------------------------------
-    void nonRecurringInOrder(BinTreeNode<T> * root, void (*Visit)(const T &)) const;
-    void nonRecurringInOrder(void (*Visit)(const T &)) const;
-
+    void nonRecursingInOrder(const BinTreeNode<T> * root, void (*Visit)(const T &)) const;
+    void nonRecursingInOrder(void (*Visit)(const T &)) const;
 
 };
 

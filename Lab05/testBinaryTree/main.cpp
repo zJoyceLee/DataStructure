@@ -46,8 +46,11 @@ void printTest(BinaryTree<T> btree, std::vector<T> vec1, std::vector<T> vec2) {
          btree.countBreadth();
             std::cout << std::endl;
     //------------------------------------------------------------------------
+    std::cout << "(4)   InOrd: ";
+        btree.InOrder(Write<char>);
+            std::cout << std::endl;
     std::cout << "(4) nRInOrd: ";
-        btree.nonRecurringInOrder(Write<char>);
+        btree.nonRecursingInOrder(Write<char>);
             std::cout << std::endl;
     //------------------------------------------------------------------------
 }
@@ -61,6 +64,29 @@ int main(int argc, char * argv[])
 	bt = CreateBinaryTree(pre, in, n);           //make up binary tree
 	printTest(bt, pre, in);
 
+	pre = std::vector<char>{'A','B','C','D','E','F','G'};
+	in  = std::vector<char>{'G','F','E','D','C','B','A'};
+	n = pre.size();
+	bt = CreateBinaryTree(pre, in, n);
+	printTest(bt, pre, in);
+
+	pre = std::vector<char>{'A','B','C','D','E','F','G'};
+	in  = std::vector<char>{'A','B','C','D','E','F','G'};
+	n = pre.size();
+	bt = CreateBinaryTree(pre, in, n);
+	printTest(bt, pre, in);
+
+	pre = std::vector<char>{'A','B','C','D','E','F','G','H','I','J'};
+	in  = std::vector<char>{'G','F','E','D','I','J','H','C','B','A'};
+	n = pre.size();
+	bt = CreateBinaryTree(pre, in, n);
+	printTest(bt, pre, in);
+
+	pre = std::vector<char>{'A','B','C','H','J','I','D','E','F','G'};
+	in  = std::vector<char>{'A','B','J','H','I','C','D','E','F','G'};
+	n = pre.size();
+	bt = CreateBinaryTree(pre, in, n);
+	printTest(bt, pre, in);
 
     std::cout << std::endl;
 	return 0;
