@@ -3,7 +3,7 @@
 template <typename T>
 MinHeap<T>::MinHeap(int maxSize) {
     if (maxSize <= 0)		{
-	    std::cerr << "堆的大小不能小于1" << std::endl;
+	    std::cerr << "Heap's max size should be positive." << std::endl;
         exit(1);
     }
 	MaxSize = maxSize;
@@ -14,7 +14,7 @@ MinHeap<T>::MinHeap(int maxSize) {
 template <typename T>
 MinHeap<T>::MinHeap(T a[],int maxSize, int n) {
 	if(n <= 0)	{
-	    std::cerr << "堆的大小不能小于1" << std::endl;
+	    std::cerr << "Heap's max size should be positive." << std::endl;
         exit(1);
     }
 	MaxSize = maxSize;
@@ -29,6 +29,11 @@ MinHeap<T>::MinHeap(T a[],int maxSize, int n) {
 		Traverse(Write<T>);
 		std::cout << std::endl;
 	}
+}
+
+template <typename T>
+MinHeap<T>::~MinHeap()  {
+    delete[] heapArr;
 }
 
 template <typename T>
@@ -119,3 +124,4 @@ void MinHeap<T>::Traverse(void (*Visit)(const T &)) const {
 	for(int i = 0; i < CurrentSize; i++)
 		(*Visit)(heapArr[i]);
 }
+

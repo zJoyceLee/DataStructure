@@ -12,9 +12,7 @@ private:
 public :
 	MinHeap(int maxSize);
 	MinHeap(T a[],int maxsize, int n);
-	~MinHeap() {
-        delete[] heapArr;
-	}
+	~MinHeap();
 	Status Insert(const T & e);
 	Status DeleteTop(T & e);
 	Status GetTop(T & e)const;
