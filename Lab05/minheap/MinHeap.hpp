@@ -12,16 +12,14 @@ private:
 public :
 	MinHeap(int maxSize);
 	MinHeap(T a[],int maxsize, int n);
-	~MinHeap() {
-        delete[] heapArr;
-	}
+	~MinHeap();
 	Status Insert(const T & e);
 	Status DeleteTop(T & e);
 	Status GetTop(T & e)const;
 	bool isEmpty() const;
 	bool isFull() const;
 	int sizeOfHeap() const;
-	void setEmpty(MinHeap<T> heap);
+	void setEmpty();
 	void Traverse(void (*Visit)(const T &)) const;
 };
 
