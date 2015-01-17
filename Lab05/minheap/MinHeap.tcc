@@ -110,8 +110,8 @@ int MinHeap<T>::sizeOfHeap() const {
 }
 
 template <typename T>
-void setEmpty(MinHeap<T> heap) {
-    heap.CurrentSize = 0;
+void MinHeap<T>::setEmpty() {
+    CurrentSize = 0;
 }
 
 template<typename T>

@@ -21,7 +21,7 @@ public :
 	bool isEmpty() const;
 	bool isFull() const;
 	int sizeOfHeap() const;
-	void setEmpty(MinHeap<T> heap);
+	void setEmpty();
 	void Traverse(void (*Visit)(const T &)) const;
 };
 
