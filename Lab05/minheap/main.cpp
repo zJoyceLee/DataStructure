@@ -1,4 +1,4 @@
-#include "MineHeap.h"
+#include "MinHeap.hpp"
 
 int main()
 {
@@ -17,7 +17,7 @@ int main()
         std::cout << std::endl << "2. É¾³ý¶Ñ¶¥ÔªËØ.";
         std::cout << std::endl << "3. display heap.";
 		std::cout << std::endl << "0. exit.";
-		std::cout << std::endl << "select(0 to 3).";
+		std::cout << std::endl << "select(0 to 3) : ";
 		std::cin >> c;
 		switch (c) 	{
 		    case '1':
