@@ -14,14 +14,14 @@ int main(int argc, char * argv[])
         do {
             if(frontElem > behindElem) {
                 frontElem = frontElem - behindElem;
-                frontElem = behindElem;
+                //behindElem = behindElem;
                 ++left;
             } else {
-                frontElem = frontElem;
+                //frontElem = frontElem;
                 behindElem = behindElem -frontElem;
                 ++right;
             }
-        } while (frontElem * 10 + behindElem != 11);
+        } while (frontElem != 1 && behindElem != 1);
         std::cout << left << " " << right << std::endl;
     }
 
