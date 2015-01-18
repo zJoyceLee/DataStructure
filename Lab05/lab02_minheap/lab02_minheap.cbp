@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="MaxHeap.hpp" />
+		<Unit filename="MaxHeap.tcc" />
 		<Unit filename="MinHeap.hpp" />
 		<Unit filename="MinHeap.tcc" />
 		<Unit filename="main.cpp" />
