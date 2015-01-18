@@ -17,5 +17,12 @@ int main()
     MinHeap<int> heap(myvec);
     printVec(heap.data());
 
+    while(not heap.data().empty()) {
+        auto top = heap.top();
+        std::cout << top << ' ';
+        heap.pop();
+    }
+    std::cout << std::endl;
+
     return 0;
 }
