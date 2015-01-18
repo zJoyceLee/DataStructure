@@ -49,7 +49,7 @@ class Error {
 private:
 	char message[MAX_ERROR_MESSAGE_LEN];
 public:
-	Error(const char *mes = "Ò»°ãÐÔÒì³£!");
+	Error(const char *mes = "error");
 	~Error(void) {};
 	void Show() const;
 };
