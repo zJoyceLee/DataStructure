@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1421593991 source:/home/joyce/Codes/cpp/DataStructure/Lab05/lab02_minheap/main.cpp
+	<iostream>
+	<vector>
+	"MinHeap.hpp"
+
+1421593521 /home/joyce/Codes/cpp/DataStructure/Lab05/lab02_minheap/MinHeap.hpp
+	<vector>
+	"MinHeap.tcc"
+
+1421594005 /home/joyce/Codes/cpp/DataStructure/Lab05/lab02_minheap/MinHeap.tcc
+
