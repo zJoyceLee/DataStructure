@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1419564032 source:/home/joyce/Codes/cpp/DataStructure/Lab04/KMP/TestKMP.cpp
+	"KMP.h"
+
+1419563487 /home/joyce/Codes/cpp/DataStructure/Lab04/KMP/KMP.h
+	"String.h"
+
+1419563535 /home/joyce/Codes/cpp/DataStructure/Lab04/KMP/String.h
+	"LinkList.h"
+
+1419563510 /home/joyce/Codes/cpp/DataStructure/Lab04/KMP/LinkList.h
+	"Assistance.h"
+	"Node.h"
+
+1419563475 /home/joyce/Codes/cpp/DataStructure/Lab04/KMP/Assistance.h
+	<cstring>
+	<iostream>
+	<limits>
+	<cmath>
+	<fstream>
+	<cctype>
+	<ctime>
+	<cstdlib>
+	<cstdio>
+	<iomanip>
+	<cstdarg>
+	<cassert>
+
+1419563522 /home/joyce/Codes/cpp/DataStructure/Lab04/KMP/Node.h
+

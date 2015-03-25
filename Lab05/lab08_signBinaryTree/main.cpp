@@ -5,7 +5,7 @@
 // gtest
 #include <gtest/gtest.h>
 
-//#define USE_TEST
+#define USE_TEST
 
 std::pair<int, int> taggedTreeFind(std::pair<int, int> tag);
 
