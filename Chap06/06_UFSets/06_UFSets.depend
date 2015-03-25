@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1427218504 source:/home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/main.cpp
+	<vector>
+	<iostream>
+	"UFSetsNode.hpp"
+	"UFSets.hpp"
+
+1427210933 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSetsNode.hpp
+
+1427218776 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.hpp
+	<vector>
+	"UFSetsNode.hpp"
+	"UFSets.tcc"
+
+1427218402 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.tcc
+
