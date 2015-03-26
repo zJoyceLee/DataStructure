@@ -1,19 +1,20 @@
 # depslib dependency file v1.0
-1427293452 source:/home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/main.cpp
+1427388721 source:/home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/main.cpp
 	<vector>
 	<iostream>
 	"UFSetsNode.hpp"
 	"UFSets.hpp"
+	"helper.hpp"
 	<gtest/gtest.h>
 
-1427210933 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSetsNode.hpp
+1427379778 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSetsNode.hpp
 
-1427218836 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.hpp
+1427385528 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.hpp
 	<vector>
 	"UFSetsNode.hpp"
 	"UFSets.tcc"
 
-1427218402 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.tcc
+1427381819 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/UFSets.tcc
 
 1427338887 source:/files/Nutstore/000/SHUCourse/JoyceLee/DataStructure/Chap06/06_UFSets/main.cpp
 	<vector>
@@ -40,4 +41,13 @@
 	"helper.tcc"
 
 1427339012 /files/Nutstore/000/SHUCourse/JoyceLee/DataStructure/Chap06/06_UFSets/helper.tcc
+
+1427365468 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/helper.hpp
+	<gtest/gtest.h>
+	<sstream>
+	<vector>
+	<string>
+	"helper.tcc"
+
+1427365468 /home/joyce/Codes/cpp/DataStructure/Chap06/06_UFSets/helper.tcc
 

@@ -20,8 +20,10 @@ public:
     const std::vector<UFSetsNode<T>> * data() const { return &(m_vec); }
 
     void unionSet(const UFSets<T> & rhs);
+    void unionSetByNodeNum(const UFSets<T> & rhs);
 
     bool find(const T & value);
+    std::size_t findAll(const T & value, const std::vector<UFSets<T>> & vec);
 };
 
 #include "UFSets.tcc"
