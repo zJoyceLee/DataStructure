@@ -15,8 +15,8 @@ TEST(TestUFSetsClass, testUnionSet) {
     EXPECT_EQ(1,1);
     //EXPECT_EQ({{1, -2},  {2, 0}}, 0);
     //assert_eq_vector({{1,-2}, {2,0}},s1.unionSet(s2));
-    assert_eq_vector({{1,-2}, {2,0}}, {{1,-2}, {2,0}});
-
+    assert_eq_vector(std::vector<UFSetsNode<int>>({{1,-2}, {2,0}}), *(UFSets<int>({1, 2}).data()));
+    assert_eq_UFSets_vector({{1,-2}, {2,0}}, UFSets<int>({1, 2}));
 }
 
 int main(int argc, char * argv[])

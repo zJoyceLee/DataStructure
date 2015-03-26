@@ -34,6 +34,8 @@
 		<Unit filename="UFSets.hpp" />
 		<Unit filename="UFSets.tcc" />
 		<Unit filename="UFSetsNode.hpp" />
+		<Unit filename="helper.hpp" />
+		<Unit filename="helper.tcc" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
