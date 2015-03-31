@@ -1,6 +1,7 @@
 #pragma once
 //STL
 #include <vector>
+#include <algorithm>//std::max
 //Current Project
 #include "LinkQueue.hpp"
 #include "BinTreeNode.hpp"
@@ -72,7 +73,7 @@ void CreateBinaryTree(BinTreeNode<T> * & r, std::vector<T> pre, std::vector<T> i
 	int preLeft, int preRight, int inLeft, int inRight);
 
 template <typename T>
-BinaryTree<T> & CreateBinaryTree(std::vector<T> pre, std::vector<T> in, int n);
+BinaryTree<T> & CreateBinaryTree(const std::vector<T> &pre, const std::vector<T> &in);
 
 template <typename T>
 std::size_t countDepth(BinTreeNode<T> * node);

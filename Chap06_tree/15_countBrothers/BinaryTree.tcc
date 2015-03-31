@@ -316,23 +316,6 @@ std::size_t BinaryTree<T>::countBrothers(const std::vector<T> & vec) {
     }
     return finalBrotherNum;
 }
-//---------------------------------------------------------------------------------------
-//template <typename T>
-//std::size_t BinaryTree<T>::countDepth() {
-//    BinTreeNode<T> * myroot = this->GetRoot();
-//    if(myroot == nullptr)
-//        return 0;
-//    if(myroot->leftChild != nullptr) {
-//        myroot = myroot->leftChild;
-//        return 1 + countDepth();
-//    } else {
-//        if(myroot->rightChild != nullptr) {
-//            myroot = myroot->rightChild;
-//        }
-//        return countDepth();
-//    }
-//}
-//---------------------------------------------------------------------------------------
 
 template <typename T>
 void CreateBinaryTree(BinTreeNode<T> * & r, std::vector<T> pre, std::vector<T> in, int preLeft, int preRight, int inLeft, int inRight) {
@@ -352,7 +335,8 @@ void CreateBinaryTree(BinTreeNode<T> * & r, std::vector<T> pre, std::vector<T> i
 }
 
 template <typename T>
-BinaryTree<T> & CreateBinaryTree(std::vector<T> pre, std::vector<T> in, int n) {
+BinaryTree<T> & CreateBinaryTree(const std::vector<T> &pre, const std::vector<T> &in) {
+    std::size_t n = pre.size();
 	BinTreeNode<T> * r;
 	CreateBinaryTree<T>(r, pre, in, 0, n - 1, 0, n - 1);
 
@@ -362,18 +346,16 @@ BinaryTree<T> & CreateBinaryTree(std::vector<T> pre, std::vector<T> in, int n) {
 
 template <typename T>
 std::size_t countDepth(BinTreeNode<T> * node) {
+    std::size_t leftDepth = 0, rightDepth = 0;
     if(node == nullptr)
         return 0;
     if(node->leftChild == nullptr && node->rightChild == nullptr)
         return 1;
     if(node->leftChild != nullptr) {
-        node = node->leftChild;
-        return 1 + countDepth(node);
-    } else {
-        if(node->rightChild != nullptr) {
-            node = node->rightChild;
-        }
-        return countDepth(node);
+        leftDepth = 1 + countDepth(node->leftChild);
     }
-    return countDepth(node);
+    if(node->rightChild != nullptr) {
+        rightDepth = countDepth(node->rightChild);
+    }
+    return std::max(leftDepth, rightDepth);
 }
