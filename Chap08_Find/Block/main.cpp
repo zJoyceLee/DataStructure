@@ -5,6 +5,7 @@
 #include <iostream>
 //C-Standard
 #include <cmath>
+#include <cassert>
 //g_test
 #include <gtest/gtest.h>
 //Current Project
@@ -45,43 +46,39 @@ std::vector<T> copyVec(const std::vector<T> & myvec) {
     return vec;
 }
 
-//int binarySearch(int target, const std::vector<int> & increasingOrderVec) {
-//    std::vector<int> tmpVec = copyVec<int>(increasingOrderVec);
-//
-//    if(tmpVec.size() == 0)
-//        return -1;
-//
-//    std::size_t high = tmpVec.size() - 1;
-//    std::size_t mid = std::size_t(ceil(high / 2));
-//
-//    if(target == tmpVec[mid])
-//        return int(mid);
-//
-//    if(target < tmpVec[mid]) {
-//    //about erase: [1,2,3,4,5,6].erase(begin(), begin()+3) --> [4,5,6]
-//        tmpVec.erase(tmpVec.begin() + mid, tmpVec.end());
-//        return binarySearch(target, tmpVec);
-//    }
-//    if(target > tmpVec[mid]) {
-//        tmpVec.erase(tmpVec.begin(), tmpVec.begin() + mid + 1);
-//        return mid + 1 + binarySearch(target, tmpVec);
-//    }
-//}
-//TEST(Block, testBinarySaerch) {
-//    std::vector<int> num = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-//    EXPECT_EQ( 3, binarySearch(  3, num));
-//    EXPECT_EQ(-1, binarySearch( 20, num));
-//    EXPECT_EQ( 9, binarySearch(  9, num));
-//    EXPECT_EQ( 0, binarySearch(  0, num));
-//    EXPECT_EQ(-1, binarySearch(-33, num));
-//
-//    //------------------------------0---1---2---3---4---5---6
-//    EXPECT_EQ( 0, binarySearch( 3, {3, 20, 21, 22, 30, 35, 40}));
-//    EXPECT_EQ( 5, binarySearch(35, {3, 20, 21, 22, 30, 35, 40}));
-//    EXPECT_EQ(-1, binarySearch( 0, {3, 20, 21, 22, 30, 35, 40}));
-//    EXPECT_EQ(-1, binarySearch(90, {3, 20, 21, 22, 30, 35, 40}));
-//    EXPECT_EQ(-1, binarySearch(33, {3, 20, 21, 22, 30, 35, 40}));
-//}
+bool isEven(int num) {
+    return (num & 0b1) == 0;
+}
+
+int binarySearch2(int target, const std::vector<int> & increasingOrderVec) {
+    auto vecSize = increasingOrderVec.size();
+
+    if(vecSize == 0)
+        return -1;
+    // when size is 1, then divide into 2 halves will not give the right result
+    if(vecSize == 1)
+        return (target == increasingOrderVec[0]) ? 0 : -1;
+
+    auto mid = isEven(vecSize) ? (vecSize/2) : (vecSize/2+1);
+    int midValue = increasingOrderVec[mid];
+
+    if(target == midValue) {
+        return static_cast<int>(mid);
+    } else if(target < midValue) {
+        std::vector<int> tmp(increasingOrderVec.begin(), increasingOrderVec.begin() + mid);
+        return binarySearch2(target, tmp);
+    } else { // (target > midValue)
+        std::vector<int> tmp(increasingOrderVec.begin() + mid, increasingOrderVec.end());
+        int ret = binarySearch2(target, tmp);
+        if(ret == -1)
+            return -1;
+        return mid + ret;
+    }
+
+    // we must return at all paths, even it is unreachable.
+    assert(false && "unreachable");
+    return -1;
+}
 
 int binarySearch(int low, int high, int target, std::vector<int> increasingOrderVec) {
     int mid = low + (high - low) / 2;
@@ -95,22 +92,40 @@ int binarySearch(int low, int high, int target, std::vector<int> increasingOrder
         if(increasingOrderVec[mid] < target)
             return binarySearch(mid + 1, high, target, increasingOrderVec);
     }
+    // we must return at all paths, even it is unreachable.
+    assert(false && "unreachable");
+    return -1;
 }
 
 TEST(Block, testBinarySearch) {
     std::vector<int> num = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     EXPECT_EQ( 3, binarySearch(0, num.size(),  3, num));
-    EXPECT_EQ(-1, binarySearch(0, 10, 20, num));
-    EXPECT_EQ( 9, binarySearch(0, 10,  9, num));
-    EXPECT_EQ( 0, binarySearch(0, 10,  0, num));
-    EXPECT_EQ(-1, binarySearch(0, 10,-33, num));
+    EXPECT_EQ(-1, binarySearch(0, num.size(), 20, num));
+    EXPECT_EQ( 9, binarySearch(0, num.size(),  9, num));
+    EXPECT_EQ( 0, binarySearch(0, num.size(),  0, num));
+    EXPECT_EQ(-1, binarySearch(0, num.size(),-33, num));
 
-    //------------------------------------0---1---2---3---4---5---6
-    EXPECT_EQ( 0, binarySearch(0, 7,  3, {3, 20, 21, 22, 30, 35, 40}));
-    EXPECT_EQ( 5, binarySearch(0, 7, 35, {3, 20, 21, 22, 30, 35, 40}));
-    EXPECT_EQ(-1, binarySearch(0, 7,  0, {3, 20, 21, 22, 30, 35, 40}));
-    EXPECT_EQ(-1, binarySearch(0, 7, 90, {3, 20, 21, 22, 30, 35, 40}));
-    EXPECT_EQ(-1, binarySearch(0, 7, 33, {3, 20, 21, 22, 30, 35, 40}));
+    num = {3, 20, 21, 22, 30, 35, 40};
+    EXPECT_EQ( 0, binarySearch(0, num.size(),  3, num));
+    EXPECT_EQ( 5, binarySearch(0, num.size(), 35, num));
+    EXPECT_EQ(-1, binarySearch(0, num.size(),  0, num));
+    EXPECT_EQ(-1, binarySearch(0, num.size(), 90, num));
+    EXPECT_EQ(-1, binarySearch(0, num.size(), 33, num));
+
+    //------------------------------------------------------------------------
+    num = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    EXPECT_EQ( 3, binarySearch2(  3, num));
+    EXPECT_EQ(-1, binarySearch2( 20, num));
+    EXPECT_EQ( 9, binarySearch2(  9, num));
+    EXPECT_EQ( 0, binarySearch2(  0, num));
+    EXPECT_EQ(-1, binarySearch2(-33, num));
+
+    num = {3, 20, 21, 22, 30, 35, 40};
+    EXPECT_EQ( 0, binarySearch2(  3, num));
+    EXPECT_EQ( 5, binarySearch2( 35, num));
+    EXPECT_EQ(-1, binarySearch2(  0, num));
+    EXPECT_EQ(-1, binarySearch2( 90, num));
+    EXPECT_EQ(-1, binarySearch2( 33, num));
 }
 
 int findRange(int target, std::vector<int> increasingOrderVec) {
@@ -126,7 +141,7 @@ int findRange(int target, std::vector<int> increasingOrderVec) {
         else
             low = mid + 1;
     }
-    if(low > increasingOrderVec.size() - 1)
+    if(std::size_t(low) > increasingOrderVec.size() - 1)
         return -1;
     return low;
 }
