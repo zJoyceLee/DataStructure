@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1431350782 source:/home/joyce/Codes/cpp/DataStructure/Chap08_Find/labHash_discuss5/main.cpp
+	<iostream>
+	<vector>
+	<array>
+	"helper.hpp"
+	"gtest/gtest.h"
+
+1431344114 /home/joyce/Codes/cpp/DataStructure/Chap08_Find/labHash_discuss5/helper.hpp
+	<gtest/gtest.h>
+	<sstream>
+	<vector>
+	<string>
+	"helper.tcc"
+
+1431344141 /home/joyce/Codes/cpp/DataStructure/Chap08_Find/labHash_discuss5/helper.tcc
+
