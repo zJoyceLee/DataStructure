@@ -105,6 +105,8 @@ TEST(Hash, testConstruct) {
     }; // initialization
     std::vector<int> mykeys = {22,41,53,46,30,13,1,67};
 
+    double countFindPosition = double(mykeys.size()); // ASL
+
     for(std::size_t index = 0; index < mykeys.size(); ++index) {
         int key = mykeys[index]; // index is increasing
         std::size_t position = myHash(key);
@@ -114,12 +116,18 @@ TEST(Hash, testConstruct) {
         } else {
             std::size_t i = 1;
             do{
+                if(i == 11)
+                    break;
                 rePosition = conflict(key, 11, i);
                 ++i;
             } while(myvec[rePosition].second == true);
             myvec[rePosition] = {key, true};
+            countFindPosition += double(i - 1); // ASL
         }
     } // (1) construct
+
+    std::cout << "ASL(success): " << countFindPosition / mykeys.size() << ". should be: " << 17./8 << std::endl;
+    EXPECT_EQ(countFindPosition / mykeys.size(), 17./8); // ASL
 
     ///{{22,true},{67,true},{41,true},{30,true},{0, false},{53,true},{46,true},{0, false},{13,true},{0, false},{1,true}}
     std::vector<int> resultVec;
