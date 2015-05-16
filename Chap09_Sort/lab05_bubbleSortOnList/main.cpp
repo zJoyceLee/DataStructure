@@ -1,5 +1,6 @@
 //STL
 #include <iostream>
+#include <string>
 //Current Project
 #include "LinkedList.hpp"
 #include "LinkedListNode.hpp"
@@ -23,15 +24,23 @@ void print(const LinkedList<T> & lst) {
     std::cout << '}' << std::endl;
 }
 
-template <typename T>
-std::size_t to_index(const LinkedList<T> & lst, LinkedListNode<T> * node) {
-    std::size_t ret = 0;
-    for(auto i = lst.begin(); i != lst.end(); i = i->next()) {
-        if(i == node)
-            break;
-        ++ret;
+namespace std {
+    template <typename T>
+    std::string to_string(const LinkedList<T> & lst) {
+        std::string ret;
+        ret += '[';
+        for (auto i = lst.begin(); i != lst.end(); i = i->next()) {
+            ret += std::to_string(i->data());
+            ret += ',';
+        }
+
+        if(ret.back() == ',') {
+            ret.back() = ']';
+        } else {
+            ret += ']';
+        }
+        return ret;
     }
-    return ret;
 }
 
 template <typename T>
@@ -103,25 +112,22 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
     }
     return lst;
 #endif
-    print(lst);
     auto i = lst.begin();
-    auto j = lst.begin();
     while(i->next() != nullptr) {
         auto inext = i->next();
+
+        auto j = lst.begin();
         while(j->next() != nullptr) {
             auto cur = j;
             auto next = j->next();
 
             if(cur->data() > next->data()) {
-
                 if(cur->prev() == nullptr && next->next() == nullptr) {
                     // case 1: only 2 nodes
                     next->next() = cur; cur->prev() = next;
                     next->prev() = nullptr; cur->next() = nullptr;
                     // change the first node
                     lst.head() = next;
-
-                    j = cur;
                 } else if(cur->prev() == nullptr) {
                     // case 2: swap the first node and the second node
                     auto n = next->next();
@@ -130,25 +136,21 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
                     next->next() = cur; cur->prev() = next;
                     // change the first node
                     lst.head() = next;
-
-                    j = cur;
                 } else if(next->next() == nullptr) {
                     // case 3: swap the last node and the node before last
                     auto p = cur->prev();
                     cur->next() = nullptr;
                     next->prev() = p; p->next() = next;
                     next->next() = cur; cur->prev() = next;
-
-                    j = cur;
                 } else {
                     // normal case
                     auto p = cur->prev(); auto n = next->next();
                     next->prev() = p; p->next() = next;
                     cur->next() = n; n->prev() = cur;
                     next->next() = cur; cur->prev() = next;
-
-                    j = cur;
                 }
+                j = cur;
+                continue;
             }
             j = next;
         }
@@ -159,13 +161,11 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
 }
 
 TEST(BubbleSort, teatSortOneNode) {
-    LinkedList<int> lst({1});
-    printLST(bubbleSort(lst));
+    EXPECT_EQ("[1]", std::to_string(bubbleSort(LinkedList<int>({1}))));
 }
 
 TEST(BubbleSort, testSortTwoNodes) {
-    LinkedList<int> lst({99,1});
-    printLST(bubbleSort(lst));
+    EXPECT_EQ("[1,99]", std::to_string(bubbleSort(LinkedList<int>({99,1}))));
 }
 
 TEST(BubbleSort, teatSortThreeNodes1) {
