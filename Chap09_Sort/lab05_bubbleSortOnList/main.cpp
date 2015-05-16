@@ -15,7 +15,28 @@ void printLST(const LinkedList<T> & lst) {
 }
 
 template <typename T>
+void print(const LinkedList<T> & lst) {
+    std::cout << '{' << std::endl;
+    for (auto i = lst.begin(); i != lst.end(); i = i->next()) {
+        std::cout << "  (" << i->data() << ',' << i->prev() << ',' << i->next() << ")" << std::endl;
+    }
+    std::cout << '}' << std::endl;
+}
+
+template <typename T>
+std::size_t to_index(const LinkedList<T> & lst, LinkedListNode<T> * node) {
+    std::size_t ret = 0;
+    for(auto i = lst.begin(); i != lst.end(); i = i->next()) {
+        if(i == node)
+            break;
+        ++ret;
+    }
+    return ret;
+}
+
+template <typename T>
 LinkedList<T> bubbleSort(LinkedList<T> lst) {
+#if 0
     for(auto curj = lst.begin(); curj->next() != nullptr; curj = curj->next()) {
         for(auto cur = lst.begin(); cur->next() != nullptr; cur = cur->next()) {
             if((cur->data()) > (cur->next()->data())) {
@@ -81,21 +102,69 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
         }
     }
     return lst;
-}
+#endif
+    print(lst);
+    auto i = lst.begin();
+    auto j = lst.begin();
+    while(i->next() != nullptr) {
+        auto inext = i->next();
+        while(j->next() != nullptr) {
+            auto cur = j;
+            auto next = j->next();
 
-//TEST(BubbleSort, testSortNull) {
-//    LinkedList<int> lst();
-//    printLST(bubbleSort(lst));
-//}
+            if(cur->data() > next->data()) {
 
-TEST(BubbleSort, testSortMoreThanThreeNodes) {
-    LinkedList<int> lst({5,7,3,2,8,4,1,0});
-    //bubbleSort(lst);
-    printLST(bubbleSort(lst));
+                if(cur->prev() == nullptr && next->next() == nullptr) {
+                    // case 1: only 2 nodes
+                    next->next() = cur; cur->prev() = next;
+                    next->prev() = nullptr; cur->next() = nullptr;
+                    // change the first node
+                    lst.head() = next;
+
+                    j = cur;
+                } else if(cur->prev() == nullptr) {
+                    // case 2: swap the first node and the second node
+                    auto n = next->next();
+                    next->prev() = nullptr;
+                    cur->next() = n; n->prev() = cur;
+                    next->next() = cur; cur->prev() = next;
+                    // change the first node
+                    lst.head() = next;
+
+                    j = cur;
+                } else if(next->next() == nullptr) {
+                    // case 3: swap the last node and the node before last
+                    auto p = cur->prev();
+                    cur->next() = nullptr;
+                    next->prev() = p; p->next() = next;
+                    next->next() = cur; cur->prev() = next;
+
+                    j = cur;
+                } else {
+                    // normal case
+                    auto p = cur->prev(); auto n = next->next();
+                    next->prev() = p; p->next() = next;
+                    cur->next() = n; n->prev() = cur;
+                    next->next() = cur; cur->prev() = next;
+
+                    j = cur;
+                }
+            }
+            j = next;
+        }
+        i = inext;
+    }
+
+    return lst;
 }
 
 TEST(BubbleSort, teatSortOneNode) {
     LinkedList<int> lst({1});
+    printLST(bubbleSort(lst));
+}
+
+TEST(BubbleSort, testSortTwoNodes) {
+    LinkedList<int> lst({99,1});
     printLST(bubbleSort(lst));
 }
 
@@ -109,8 +178,8 @@ TEST(BubbleSort, teatSortThreeNodes2) {
     printLST(bubbleSort(lst));
 }
 
-TEST(BubbleSort, testSortTwoNodes) {
-    LinkedList<int> lst({99,1});
+TEST(BubbleSort, testSortMoreThanThreeNodes) {
+    LinkedList<int> lst({5,7,3,2,8,4,1,0});
     printLST(bubbleSort(lst));
 }
 

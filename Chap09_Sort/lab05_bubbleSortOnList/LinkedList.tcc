@@ -1,12 +1,6 @@
 #pragma once
 
 template <typename T>
-LinkedList<T>::LinkedList() :
-    m_data(nullptr)
-{
-}
-
-template <typename T>
 LinkedList<T>::LinkedList(const std::vector<T> & vec) :
     m_data(nullptr)
 {

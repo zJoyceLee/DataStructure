@@ -10,15 +10,16 @@ private: // variable
     LinkedListNode<T> * m_data;
 private: //
 public: // function
-    LinkedList();
     LinkedList(const std::vector<T> & vec);
     /// added 12-03
     LinkedList(const LinkedList & rhs);
     ~LinkedList();
 
+    LinkedListNode<T> *& head() { return m_data; }
+    const LinkedListNode<T> * head() const { return m_data; }
+
     LinkedListNode<T> * begin() { return m_data; }
     const LinkedListNode<T> * begin() const { return m_data; }
-    LinkedListNode<T> *& head() { return m_data; }
 
     LinkedListNode<T> * end() { return nullptr; }
     const LinkedListNode<T> * end() const { return nullptr; }
