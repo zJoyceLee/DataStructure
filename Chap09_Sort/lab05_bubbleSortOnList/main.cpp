@@ -112,16 +112,16 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
     }
     return lst;
 #endif
-    auto i = lst.begin();
-    while(i->next() != nullptr) {
-        auto inext = i->next();
-
+    bool done = false;
+    while(!done) {
+        done = true;
         auto j = lst.begin();
         while(j->next() != nullptr) {
             auto cur = j;
             auto next = j->next();
 
             if(cur->data() > next->data()) {
+                done = false;
                 if(cur->prev() == nullptr && next->next() == nullptr) {
                     // case 1: only 2 nodes
                     next->next() = cur; cur->prev() = next;
@@ -154,7 +154,6 @@ LinkedList<T> bubbleSort(LinkedList<T> lst) {
             }
             j = next;
         }
-        i = inext;
     }
 
     return lst;
@@ -181,7 +180,7 @@ TEST(BubbleSort, teatSortThreeNodes2) {
     EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({92,1,0}))));
     EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({92,0,1}))));
     EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({1,92,0}))));
-    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({0,91,1}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({0,92,1}))));
     EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({1,0,92}))));
     EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({0,1,92}))));
 }
