@@ -169,18 +169,27 @@ TEST(BubbleSort, testSortTwoNodes) {
 }
 
 TEST(BubbleSort, teatSortThreeNodes1) {
-    LinkedList<int> lst({92,1,3});
-    printLST(bubbleSort(lst));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({92,1,3}))));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({92,1,3}))));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({1,92,3}))));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({3,92,1}))));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({1,3,92}))));
+    EXPECT_EQ("[1,3,92]", std::to_string(bubbleSort(LinkedList<int>({3,1,92}))));
 }
 
 TEST(BubbleSort, teatSortThreeNodes2) {
-    LinkedList<int> lst({92,1,0});
-    printLST(bubbleSort(lst));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({92,1,0}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({92,0,1}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({1,92,0}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({0,91,1}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({1,0,92}))));
+    EXPECT_EQ("[0,1,92]", std::to_string(bubbleSort(LinkedList<int>({0,1,92}))));
 }
 
 TEST(BubbleSort, testSortMoreThanThreeNodes) {
     LinkedList<int> lst({5,7,3,2,8,4,1,0});
-    printLST(bubbleSort(lst));
+    //printLST(bubbleSort(lst));
+    EXPECT_EQ("[0,1,2,3,4,5,7,8]", std::to_string(bubbleSort(LinkedList<int>({5,7,3,2,8,4,1,0}))));
 }
 
 int main(int argc, char *argv[]) {
