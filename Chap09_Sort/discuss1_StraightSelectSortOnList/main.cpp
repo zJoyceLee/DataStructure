@@ -63,28 +63,69 @@ for (j = 0; j < n-1; j++) {
 
 template <typename T>
 LinkedList<T> selectSort(LinkedList<T> lst) {
-    auto i_prev = lst.begin(), i = lst.begin()->next();
-    auto iMin_prev = lst.begin(), iMin = iMin_prev->next();
-    Node<T> * j = lst.begin();
-    if(lst.begin()->next() != nullptr) {
+    Node<T> * i_prev, * i;
+    Node<T> * iMin_prev, * iMin;
+    Node<T> * j = lst.begin(), * j_prev = lst.getHead();
+    if(lst.begin() != nullptr) {
         // lst is not empty
-        for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
+
+        //for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
+        while(j->next() != lst.end()) {
             iMin = j;
-            while(i->next() != nullptr) {
-                i_prev = i;
-                i = j->next();
+
+            //for(i = j->next(); i != lst.end(); i = i->next()){
+            i = j->next();
+            while(i != lst.end()) {
 
                 if(i->data() < iMin->data()) {
                     iMin = i;
                     iMin_prev = i_prev;
                 }
+
+                i_prev = i;
+                i = i->next();
             }
             if(iMin != j) {
                 std::swap(j->data(), iMin->data());
+                // we have a head, and it can't change, in the other word: there are one node at the beginning of the list
+                #ifdef changePointer
+                if(j != iMin_prev && iMin->next() == nullptr) {
+                    //iMin is at the end of the list
+                    auto j_next = j->next();
+
+                    j_prev->next() = iMin;
+                    iMin->next() = j_next;
+                    iMin_prev->next() = j;
+                    j->next() = nullptr;
+
+                }else if(j == iMin_prev) {
+                    auto iMin_next = iMin->next();
+                    j_prev->next() = iMin;
+                    iMin->next() = j;
+                    j->next() = iMin_next;
+
+                } else if(j != iMin_prev && iMin->next() != nullptr) {
+                    auto iMin_next = iMin->next();
+                    auto j_next = j->next();
+
+                    j_prev->next() = iMin;
+                    iMin->next() = j_next;
+                    iMin_prev->next() = j;
+                    j->next() = iMin_next;
+
+                } else {
+                    std::cout << "loss." << std::endl;
+                }
+                j = iMin;j_prev = iMin_prev;
+                #endif // changePointer
             }
+
+            j_prev = j;
+            j = j->next();
         }
 
     }
+
     return lst;
 }
 
