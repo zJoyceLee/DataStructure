@@ -11,10 +11,14 @@ private:
     std::size_t m_length;
 private:
     Node<T> * findPrevNode(const Node<T> * position) const;
+    void destroy();
 public:
     LinkedList();
     LinkedList(const std::vector<T> & vec);
+    LinkedList(const LinkedList & rhs);
     ~LinkedList();
+
+    LinkedList & operator=(const LinkedList & rhs);
 
     Node<T> * & begin();
     const Node<T> * begin() const;

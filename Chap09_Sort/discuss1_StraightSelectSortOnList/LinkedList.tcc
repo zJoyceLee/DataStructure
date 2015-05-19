@@ -3,6 +3,15 @@
 #include <iostream>
 
 template <typename T>
+void LinkedList<T>::destroy() {
+    while(this->m_head != nullptr) {
+        Node<T> * nextNode = this->m_head->next();
+        delete this->m_head;
+        this->m_head = nextNode;
+    }
+}
+
+template <typename T>
 LinkedList<T>::LinkedList() :
     m_head(new Node<T>())
 {
@@ -18,12 +27,31 @@ LinkedList<T>::LinkedList(const std::vector<T> & vec) :
 }
 
 template <typename T>
+LinkedList<T>::LinkedList(const LinkedList & rhs) :
+    m_head(nullptr)
+{
+    (*this) = rhs;
+}
+
+template <typename T>
 LinkedList<T>::~LinkedList() {
-    while(this->m_head != nullptr) {
-        Node<T> * nextNode = this->m_head->next();
-        delete this->m_head;
-        this->m_head = nextNode;
-    }
+    this->destroy();
+}
+
+template <typename T>
+LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rhs) {
+    if (&rhs == this)
+        return (*this);
+    // destroy original data
+    this->destroy();
+    // init the head
+    this->m_head = new Node<T>();
+    // copy in the rhs's data
+    for(auto node = rhs.m_head; node != nullptr; node = node->next())
+        this->push_front(node->data());
+    // reverse myself
+    this->reversal();
+    return (*this);
 }
 
 template <typename T>

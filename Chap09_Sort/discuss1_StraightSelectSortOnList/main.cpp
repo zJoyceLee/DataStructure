@@ -34,7 +34,7 @@ namespace std {
     }
 }
 
-#ifdef arrayĵ
+#ifdef array
 /* a[0] to a[n-1] is the array to sort */
 int i,j;
 int iMin;
@@ -83,12 +83,12 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
 
         if(iMin != j) {
             std::swap(j->data(), iMin->data());
-
         }
 
     }
     return lst;
 }
+
 TEST(LinkedList, testConstruct) {
     LinkedList<int> lst({1,2,3,4});
 }

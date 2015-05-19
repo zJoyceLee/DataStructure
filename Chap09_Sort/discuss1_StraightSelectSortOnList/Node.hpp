@@ -14,7 +14,6 @@ public:
     const T & data() const { return m_data; }
 
     Node * & next() { return m_pNode; }
-    //const Node * & next() const { return m_pNode; }
     const Node * next() const { return m_pNode; }
 };
 
