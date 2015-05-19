@@ -79,10 +79,9 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
                     iMin_prev = i_prev;
                 }
             }
-        }
-
-        if(iMin != j) {
-            std::swap(j->data(), iMin->data());
+            if(iMin != j) {
+                std::swap(j->data(), iMin->data());
+            }
         }
 
     }
