@@ -63,12 +63,12 @@ for (j = 0; j < n-1; j++) {
 
 template <typename T>
 LinkedList<T> selectSort(LinkedList<T> lst) {
-    auto i_prev = lst.begin(), i = i_prev->next();
+    auto i_prev = lst.begin(), i = lst.begin()->next();
     auto iMin_prev = lst.begin(), iMin = iMin_prev->next();
     Node<T> * j = lst.begin();
     if(lst.begin()->next() != nullptr) {
         // lst is not empty
-        for(j = lst.begin()->next(); j->next() != lst.end(); j = j->next()) {
+        for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
             iMin = j;
             while(i->next() != nullptr) {
                 i_prev = i;

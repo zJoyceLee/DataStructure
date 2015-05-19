@@ -56,12 +56,12 @@ LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rhs) {
 
 template <typename T>
 Node<T> * & LinkedList<T>::begin() {
-    return m_head;
+    return m_head->next();
 }
 
 template <typename T>
 const Node<T> * LinkedList<T>::begin() const {
-    return m_head;
+    return m_head->next();
 }
 
 //template <typename T>
