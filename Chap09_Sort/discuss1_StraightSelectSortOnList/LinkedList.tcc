@@ -47,7 +47,7 @@ LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rhs) {
     // init the head
     this->m_head = new Node<T>();
     // copy in the rhs's data
-    for(auto node = rhs.m_head; node != nullptr; node = node->next())
+    for(auto node = rhs.begin(); node != rhs.end(); node = node->next())
         this->push_front(node->data());
     // reverse myself
     this->reversal();
@@ -55,12 +55,16 @@ LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & rhs) {
 }
 
 template <typename T>
-Node<T> * & LinkedList<T>::begin() {
+Node<T> * LinkedList<T>::begin() {
+    if (m_head == nullptr)
+        return m_head;
     return m_head->next();
 }
 
 template <typename T>
 const Node<T> * LinkedList<T>::begin() const {
+    if (m_head == nullptr)
+        return m_head;
     return m_head->next();
 }
 

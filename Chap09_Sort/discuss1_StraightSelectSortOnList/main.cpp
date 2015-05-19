@@ -63,14 +63,14 @@ for (j = 0; j < n-1; j++) {
 
 template <typename T>
 LinkedList<T> selectSort(LinkedList<T> lst) {
-    Node<T> * i_prev, * i;
+    Node<T> * i_prev = lst.getHead(), * i;
     Node<T> * iMin_prev, * iMin;
     Node<T> * j = lst.begin(), * j_prev = lst.getHead();
     if(lst.begin() != nullptr) {
         // lst is not empty
 
         //for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
-        while(j->next() != lst.end()) {
+        while(j->next() != nullptr) {
             iMin = j;
 
             //for(i = j->next(); i != lst.end(); i = i->next()){
@@ -102,10 +102,9 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
                     j->next() = iMin_next;
                 } else {
                     auto iMin_next = iMin->next();
-                    auto j_next = j->next();
-
+                    //auto j_next = j->next();
                     j_prev->next() = iMin;
-                    iMin->next() = j_next;
+                    iMin->next() = j->next();
                     iMin_prev->next() = j;
                     j->next() = iMin_next;
                 }

@@ -20,10 +20,10 @@ public:
 
     LinkedList & operator=(const LinkedList & rhs);
 
-    Node<T> * & begin();
-    const Node<T> * begin() const;
+    Node<T> * begin();
+    const Node<T> * begin() const ;
 
-    Node<T> * getHead() { return m_head; };
+    Node<T> * & getHead() { return m_head; };
 
     //Node<T> * & end();
     Node<T> * end();
