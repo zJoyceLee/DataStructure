@@ -98,6 +98,10 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
                 iMin_prev->next() = j;
                 j->next() = iMin_next;
             }
+
+            j_prev = iMin;
+            j = j_next;
+            continue;
         }
 
         j_prev = j;
