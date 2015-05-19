@@ -85,26 +85,22 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
                 i_prev = i;
                 i = i->next();
             }
+
             if(iMin != j) {
-                std::swap(j->data(), iMin->data());
+                //std::swap(j->data(), iMin->data());
                 // we have a head, and it can't change, in the other word: there are one node at the beginning of the list
-                #ifdef changePointer
-                if(j != iMin_prev && iMin->next() == nullptr) {
-                    //iMin is at the end of the list
-                    auto j_next = j->next();
-
-                    j_prev->next() = iMin;
-                    iMin->next() = j_next;
-                    iMin_prev->next() = j;
-                    j->next() = nullptr;
-
-                }else if(j == iMin_prev) {
-                    auto iMin_next = iMin->next();
+                //#ifdef changePointer
+                if(j->next() == iMin) {
                     j_prev->next() = iMin;
                     iMin->next() = j;
+                    j->next() = iMin->next();
+                } else if(j->next() == iMin_prev) {
+                    auto iMin_next = iMin->next();
+                    j_prev->next() = iMin;
+                    iMin->next() = iMin_prev;
+                    iMin_prev->next() = j;
                     j->next() = iMin_next;
-
-                } else if(j != iMin_prev && iMin->next() != nullptr) {
+                } else {
                     auto iMin_next = iMin->next();
                     auto j_next = j->next();
 
@@ -112,20 +108,15 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
                     iMin->next() = j_next;
                     iMin_prev->next() = j;
                     j->next() = iMin_next;
-
-                } else {
-                    std::cout << "loss." << std::endl;
                 }
-                j = iMin;j_prev = iMin_prev;
-                #endif // changePointer
+                j = iMin;
+                //#endif // changePointer
             }
 
             j_prev = j;
             j = j->next();
         }
-
     }
-
     return lst;
 }
 
