@@ -6,15 +6,6 @@
 //current test
 #include "gtest/gtest.h"
 
-template <typename T>
-void print(const LinkedList<T> & lst) {
-    std::cout << '{' << std::endl;
-    for (auto i = lst.begin(); i != lst.end(); i = i->next()) {
-        std::cout << "  (" << i->data() << ',' << i->prev() << ',' << i->next() << ")" << std::endl;
-    }
-    std::cout << '}' << std::endl;
-}
-
 namespace std {
     template <typename T>
     std::string to_string(const LinkedList<T> & lst) {
@@ -63,58 +54,54 @@ for (j = 0; j < n-1; j++) {
 
 template <typename T>
 LinkedList<T> selectSort(LinkedList<T> lst) {
-    Node<T> * i_prev = lst.getHead(), * i;
-    Node<T> * iMin_prev, * iMin;
+    if(lst.begin() == nullptr)
+        return lst;
+
+    Node<T> * i_prev = lst.getHead(), * i = nullptr;
+    Node<T> * iMin_prev, * iMin = nullptr;
     Node<T> * j = lst.begin(), * j_prev = lst.getHead();
-    if(lst.begin() != nullptr) {
-        // lst is not empty
 
-        //for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
-        while(j->next() != nullptr) {
-            iMin = j;
+    //for(j = lst.begin(); j->next() != lst.end(); j = j->next()) {
+    while(j->next() != nullptr) {
+        iMin = j;
+        Node<T> * j_next = j->next();
 
-            //for(i = j->next(); i != lst.end(); i = i->next()){
-            i = j->next();
-            while(i != lst.end()) {
+        //for(i = j->next(); i != lst.end(); i = i->next()){
+        i = j->next();
+        while(i != lst.end()) {
 
-                if(i->data() < iMin->data()) {
-                    iMin = i;
-                    iMin_prev = i_prev;
-                }
-
-                i_prev = i;
-                i = i->next();
+            if(i->data() < iMin->data()) {
+                iMin = i;
+                iMin_prev = i_prev;
             }
 
-            if(iMin != j) {
-                //std::swap(j->data(), iMin->data());
-                // we have a head, and it can't change, in the other word: there are one node at the beginning of the list
-                //#ifdef changePointer
-                if(j->next() == iMin) {
-                    j_prev->next() = iMin;
-                    iMin->next() = j;
-                    j->next() = iMin->next();
-                } else if(j->next() == iMin_prev) {
-                    auto iMin_next = iMin->next();
-                    j_prev->next() = iMin;
-                    iMin->next() = iMin_prev;
-                    iMin_prev->next() = j;
-                    j->next() = iMin_next;
-                } else {
-                    auto iMin_next = iMin->next();
-                    //auto j_next = j->next();
-                    j_prev->next() = iMin;
-                    iMin->next() = j->next();
-                    iMin_prev->next() = j;
-                    j->next() = iMin_next;
-                }
-                j = iMin;
-                //#endif // changePointer
-            }
-
-            j_prev = j;
-            j = j->next();
+            i_prev = i;
+            i = i->next();
         }
+
+        if(iMin != j) {
+            if(j->next() == iMin) {
+                Node<T> * iMin_next = iMin->next();
+                j_prev->next() = iMin;
+                iMin->next() = j;
+                j->next() = iMin_next;
+            } else if(j->next() == iMin_prev) {
+                auto iMin_next = iMin->next();
+                j_prev->next() = iMin;
+                iMin->next() = iMin_prev;
+                iMin_prev->next() = j;
+                j->next() = iMin_next;
+            } else {
+                auto iMin_next = iMin->next();
+                j_prev->next() = iMin;
+                iMin->next() = j->next();
+                iMin_prev->next() = j;
+                j->next() = iMin_next;
+            }
+        }
+
+        j_prev = j;
+        j = j_next;
     }
     return lst;
 }
