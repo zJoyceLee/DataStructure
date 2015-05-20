@@ -80,6 +80,7 @@ LinkedList<T> selectSort(LinkedList<T> lst) {
         }
 
         if(iMin != j) {
+            // do swap
             if(j->next() == iMin) {
                 Node<T> * iMin_next = iMin->next();
                 j_prev->next() = iMin;
