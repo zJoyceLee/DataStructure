@@ -28,9 +28,9 @@ std::vector<T> binaryInsertionSort(std::vector<T> mykeys) {
     d_smaller.push_back(pivot);
     for(std::size_t i = 1; i < mykeys.size(); ++i) {
         if(mykeys[i] > pivot) {
-            insertOrdered(mykeys[i], d_bigger);
+            d_bigger = insertOrdered(mykeys[i], d_bigger);
         } else {
-            insertOrdered(mykeys[i], d_smaller);
+            d_smaller = insertOrdered(mykeys[i], d_smaller);
         }
     }
     for(std::size_t i = 0; i < d_bigger.size(); ++i) {
@@ -38,14 +38,6 @@ std::vector<T> binaryInsertionSort(std::vector<T> mykeys) {
     }
     mykeys = d_smaller;
     return mykeys;
-}
-
-template <typename T>
-std::vector<T> insertSort(std::vector<T> myvec) {
-    for(std::size_t i = 0; i < myvec.size(); ++i) {
-        insertOrdered(myvec[i], myvec);
-    }
-    return myvec;
 }
 
 TEST(insertOrdered, testEmpty) {
@@ -72,13 +64,18 @@ TEST(insertOrdered, testManyElements) {
     assert_eq_vector({8,14,14,35,99}, insertOrdered(99, {8,14,14,35}));
 }
 
-TEST(InsertSort, test1) {
-    assert_eq_vector({1,2,3,4,5,6,7}, insertSort(std::vector<int>{7,5,4,2,1,3,6}));
-}
-
-TEST(BinaryInsertionSort, test1) {
+TEST(InsertSort, testAllInSmaller) {
     assert_eq_vector({1,2,3,4,5,6,7}, binaryInsertionSort(std::vector<int>{7,5,4,2,1,3,6}));
 }
+
+TEST(InsertSort, testAllInBigger) {
+    assert_eq_vector({1,2,3,4,5,6,7}, binaryInsertionSort(std::vector<int>{1,5,4,2,7,3,6}));
+}
+
+TEST(InsertSort, testDevideInTwoPart) {
+    assert_eq_vector({1,2,3,4,5,6,7}, binaryInsertionSort(std::vector<int>{4,5,1,2,7,3,6}));
+}
+
 
 int main(int argc, char *argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
